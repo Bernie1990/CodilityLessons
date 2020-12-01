@@ -1,0 +1,18 @@
+// you can write to stdout for debugging purposes, e.g.
+// printf("this is a debug message\n");
+#define the_abs(x) (x<0? -(x): x)
+
+int solution(int A[], int N) {
+    // write your code in C99 (gcc 6.2.0)
+    int diff = 0, cnt = 0, tail_cnt = N-1;
+    for (int i=0; i<N; i++){
+        //printf( "%d<%d\n", the_abs(diff+A[cnt]), the_abs(diff-A[tail_cnt]) );
+
+        if ( the_abs(diff+A[cnt]) <= the_abs(diff-A[tail_cnt]) )
+            diff += A[cnt++];
+        else
+            diff -= A[tail_cnt--];
+    }
+
+    return the_abs(diff);
+}
