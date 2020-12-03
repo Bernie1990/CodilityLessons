@@ -1,0 +1,10 @@
+// you can write to stdout for debugging purposes, e.g.
+// printf("this is a debug message\n");
+
+int solution(int A, int B, int K) {
+    // write your code in C99 (gcc 6.2.0)
+    int ret = (B-A)/K;
+    int tmp = ((B-A)%K-B%K+A%K)>=0?1:0;
+    //printf("%d,%d",(int)((B-A)/K),((B-A)%K-B%K+A%K)>=0?1:0);
+    return ret + tmp;
+}
