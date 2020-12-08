@@ -1,0 +1,93 @@
+範例中 
+A[0] = 0 -> 0號車向東行
+A[1] = 1 -> 1號車向西行
+A[2] = 0 -> 2號車向東行
+A[3] = 1 -> 3號車向西行
+A[4] = 1 -> 4號車向西行
+
+第一次思考是 C3/2 * C2/1 - 向西大於向東的次數 = 6 - 1 = 5
+後來想直接拆開 A[n] == 0 的情況去計算在向西大於向東的條件下的次數即可
+
+可以使用 prefix Sums 方法。
+
+---
+// you can write to stdout for debugging purposes, e.g.
+// printf("this is a debug message\n");
+int *prefix_sums(int *A, int N){
+    int *P = (int *)malloc((N+1)*sizeof(int));
+    P[0] = 0;
+    for (int i = 1; i<(N+1); i++){
+        P[i] = P[i-1] + A[i];
+        //printf("%d ", P[i]);
+    }
+    return P;
+}
+
+int factorial(int n){
+    int ret = 1;
+    if (n <= 1) return ret; 
+    for (int i = 2; i<=n; i++){
+        ret *= i;
+    }
+    return ret;
+}
+
+int combination(int top, int bot){
+    return factorial(top)/factorial(bot)/factorial(top-bot);
+}
+
+int solution(int A[], int N) {
+    // write your code in C99 (gcc 6.2.0)
+    int ret = 0;
+    int *P = prefix_sums(A,N);
+
+    for (int i = 0; i<N; i++){
+        if (!A[i]) {
+            ret += P[N]-P[i];
+        }
+    }
+
+    free(P);
+    return ret;
+}
+--
+Finished: 2020-12-07 09:32 UTC
+
+Started: 2020-12-07 08:58 UTC
+
+Invitation Created: 2020-12-07 08:57 UTC
+
+===
+[the 2nd time]
+// you can write to stdout for debugging purposes, e.g.
+// printf("this is a debug message\n");
+int *prefix_sums(int *A, int N){
+    int *P = (int *)malloc((N+1)*sizeof(int));
+    P[0] = 0;
+    for (int i = 1; i<(N+1); i++){
+        P[i] = P[i-1] + A[i-1];
+        //printf("%d ", P[i]);
+    }
+    return P;
+}
+
+int solution(int A[], int N) {
+    // write your code in C99 (gcc 6.2.0)
+    int ret = 0;
+    int *P = prefix_sums(A,N);
+
+    for (int i = 0; i<N; i++){
+        if (!A[i]) {
+            ret += P[N]-P[i];
+            //printf("[%d i%d]", P[N], i);
+        }
+    }
+
+    free(P);
+    return ret<=1000000000? ret:-1;
+}
+---
+
+Started: 2020-12-07 09:45 UTC
+
+Invitation Created: 2020-12-07 09:45 UTC
