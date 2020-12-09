@@ -539,6 +539,10 @@ int solution(int A[], int N) {
 }
 ---
 https://app.codility.com/demo/results/trainingKPE89R-X42/
+WRONG ANSWER
+got 943825005 expected 964280454
+WRONG ANSWER
+got 964280454
 
 // you can write to stdout for debugging purposes, e.g.
 // printf("this is a debug message\n");
@@ -636,3 +640,7 @@ int solution(int A[], int N) {
 
     return res;
 }
+
+---
+將值改為DOUBLE去運算即達100分:
+https://app.codility.com/demo/results/trainingDPGMF7-4FJ/
